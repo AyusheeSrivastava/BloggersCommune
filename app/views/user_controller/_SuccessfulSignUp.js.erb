@@ -1,0 +1,7 @@
+<%  if @success=='true' %>
+	
+	$('#pager_div').hide();
+	$('#closeBtnId').click();
+
+	<%end%>
+$("#msg_renderer").html("<%= escape_javascript(render :template=>'user_controller/_Msg_renderer.html.erb' )%>")

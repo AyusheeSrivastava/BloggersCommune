@@ -1,0 +1,4 @@
+<% if @success=='true' %>
+$('#EditDiv').hide();
+	<%end%>
+$("#msg_renderer").html("<%= escape_javascript(render :template=>'user_controller/_Msg_renderer.html.erb' )%>")

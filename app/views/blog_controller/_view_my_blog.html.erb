@@ -1,0 +1,63 @@
+<div class="Edit_div" id="EditDiv">
+</div><div class="viewDiv"  style="width:fit-content; background-image:url('<%=asset_path("background_image4.jpg")%>'); background-repeat: no-repeat;
+    background-size: cover;
+    height: fit-content; 
+    font-style: italic;
+    font-size: 20px;
+    color: darkkhaki;
+    padding: 20px;
+    width:100%;" >
+<table>
+<% @object.each do |x|%>
+<%logger.debug"Dhruvvvv#{x.inspect}"%>
+
+<tr>
+		<td style="color:aquamarine;">  Bloggers Title :</td>
+
+		<td style="color:darkgoldenrod;"><%=x.title%></td><td>&nbsp;</td><td>
+<% a="<img src='#{asset_path("edit_image1.png")}' style='height: 22px;width: 22px;'>" %>
+<%= link_to a.html_safe ,{:controller => "blog_controller", :action => "edit_blog",:id => x.id,:remote => true},:onclick=>"  loader('modalBodyId');" ,'data-toggle'=>"modal",'data-target'=>"#myModal",:title=>"Edit",:class => 'links'  %> </td><td>
+<img src='<%=asset_path("delete_button.png")%>' style='height: 30px;width: 30px;' onclick= 'cnfirmDelete("<%=x.id%>");' title="Delete"></td>
+</tr>
+<tr>
+	<td style="color:darkmagenta;"> Bloggers Description :</td>
+	<td style="color:darkgreen;">
+<%=x.description%></td>
+
+</tr>
+<tr>
+	<td style="padding-bottom: 20px;">
+		
+	</td>
+</tr>
+
+<%end%>
+</table>
+<div id="paginate_control" style="float:right;margin-top:-10px;">
+	<%if @current_page.to_i>1%>
+<%= link_to "previous" ,{:controller => "blog_controller", :action => "users_blog",:page=>@current_page.to_i-1 ,:remote => true},:class => 'links'  %>
+<%end%>
+|<%=@current_page%>|
+<% if (@current_page.to_i*5)<@total_data_count.to_i%>
+<%= link_to "next" ,{:controller => "blog_controller", :action => "users_blog",:page=>@current_page.to_i+1 ,:remote => true},:class => 'links'  %>
+<%end%>
+</div>
+</div>
+<script type="text/javascript">
+
+function cnfirmDelete(id){
+	var a=confirm("are you sure you want to delete this blog ?");
+	if(a==true)
+	{
+	$.ajax({
+		type:'get',
+		url:'http://localhost:3000/blog_controller/delete_your_blog?id='+id
+
+	})
+
+}
+
+}
+
+
+</script>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  firstname: 
+  secondname: 
+  password: 
+  repeatPassword: 
+  dob: 2018-05-25
+  email: 
+  phoneNo: 1
+
+two:
+  firstname: 
+  secondname: 
+  password: 
+  repeatPassword: 
+  dob: 2018-05-25
+  email: 
+  phoneNo: 1

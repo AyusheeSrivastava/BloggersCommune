@@ -1,0 +1,7 @@
+$("#blogDiv").html("<%=escape_javascript(render :template=>'blog_controller/_backPage.html.erb')%>")
+$("#msg_renderer").html("<%= escape_javascript(render :template=>'user_controller/_Msg_renderer.html.erb' )%>")
+
+<% if @success=='true' %>
+$('#closeBtnId').click();
+$("#home_link_usrname").html("<%=@object.firstname%>  <%=@object.secondname%>")
+<%end%>

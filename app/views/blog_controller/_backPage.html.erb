@@ -1,0 +1,39 @@
+<center>
+        
+        <div style="margin-top: 5%;background: black;width: 55%;height: 310px;border-radius: 5%;box-shadow: grey 10px 10px;">
+            <div style="margin-left: 10px;margin-top: 10px;">
+            <% if @object.gender==0 %>
+             <img src='<%=asset_path("img_avatar of boy.png")%>' style='height: 100px;width: 100px;border-radius: 50%;box-shadow: grey 7px 3px;float: left;'>
+             <%else%>
+              <img src='<%=asset_path("img_avatar2 of girl.png")%>' style='height: 100px;width: 100px; border-radius:50%;box-shadow: grey 7px 3px;float: left; '>
+              <%end%>
+
+        </div>
+        <div style="float:left;">
+        	<table style="font-style: oblique;font-family: serif;font-size: 23px;display: block;margin-left: 30px;color: gray;">
+        		<tr>
+        			<td style="color:slategrey;"><b> First Name </b></td>  <td>~></td> <td style="color:darkgoldenrod;"> <%=@object.firstname%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>SecondName </b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.secondname%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>Email </b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.email%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>Date Of Birth</b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.dob.strftime("%b %d,%Y")%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>Phone Number</b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.phoneNo%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+                <% if @object.gender==0 %>
+                <tr><td style="color:slategrey;"><b>Gender</b></td><td>~></td><td style="color:darkgoldenrod;">Male</td>
+                </tr><tr><td style="padding-bottom: 5px;"></td></tr>
+                <%else%>
+                <tr><td style="color:slategrey;"><b>Gender</b></td><td>~></td><td style="color:darkgoldenrod;">Female</td>
+                </tr><tr><td style="padding-bottom: 5px;"></td></tr>
+
+                <%end%>
+
+        	</table>
+            <br>
+            <%= link_to "Update Basic Info",{:controller => "user_controller", :action => "edit_info",:remote => true,:key =>@object.id},:style=>"padding: 10px 40px;font-size: 25px;border-bottom-style: double;background-color: cornsilk;border-radius: 9px;",'data-toggle'=>"modal" ,'data-target'=>"#myModal",:class => 'links'  %> 
+        </div>
+        </div>
+    </center>

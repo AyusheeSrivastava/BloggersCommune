@@ -1,0 +1,232 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<%= form_tag( { :action => :submit_registeration_form, :controller=> :user_controller},{ :method => :post,:remote =>true}) do %>
+  <div class="container" style="width:fit-content; background-image:url('<%=asset_path("background_image.jpg")%>');
+  background-repeat: no-repeat;
+    background-size: cover;
+    height: fit-content; 
+    font-style: italic;
+    font-size: 20px;
+    color: darkkhaki;">
+    
+    <p>Please fill in this form to create an account.</p>
+    
+     <label for="name"><b>FirstName</b></label>
+    <input type="text" placeholder="Enter FirstName" id="name" name="name" required>
+
+     <label for="name2"><b>SecondName</b></label>
+    <input type="text" placeholder="Enter SecondName" id="name2" name="name2" required>
+
+    <label for="phoneNo"><b>Phone Number</b></label>
+    <input type="text" placeholder="Enter PhoneNumber" id="phoneNo" name="phoneNo" required>
+
+    <label for="dob"><b>Date Of Birth</b></label>
+    <input type="date" placeholder="Enter DateOfBirth" id="dob" name="dob" required>
+    <br>
+    <br>
+<label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+    <label for="Gender"><b>Gender</b></label>
+    <input type="radio" id="gender" name="gender" value="0" checked> Male
+  <input type="radio" id="gender" name="gender" value="1" > Female<br>
+  
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+
+    <label for="psw_repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw_repeat" id="psw_repeat" required>
+    <hr>
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+    
+      <%= submit_tag "Register",:onclick=> "return validateForm();",:class=>"registerbtn" %>
+      
+  </div>
+  
+  <div class="container signin" style="width:fit-content;">
+    <p>Already have an account? <%= link_to "Login",{:controller => "user_controller", :action => "login_method",:remote => true},:onclick=>"  loader('modalBodyId');", :class => 'links'%></p>
+  </div>
+<% end %>
+
+</body>
+</html>
+<script>
+    function validateForm()
+    {
+var x=document.getElementById("name").value;
+var x1=document.getElementById("name2").value;
+
+var y=document.getElementById("password").value;
+var z=document.getElementById("phoneNo").value;
+var k=document.getElementById("email").value;
+var k2=document.getElementById("dob").value;
+var FlagForPasswordComparison=false;
+var PassRepeat=document.getElementById("psw_repeat").value;
+        var flag1=false;
+        var flag2=false;
+        var flag3=false;
+        var flag4=false;
+        var flag5=false;
+        var flag6=false;
+
+    var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+if(y==PassRepeat){
+    FlagForPasswordComparison=true;
+}
+else{
+    FlagForPasswordComparison=false;
+    alert("password and confirm password should be same");
+}
+if(dd<10) {
+    dd = '0'+dd
+} 
+
+if(mm<10) {
+    mm = '0'+mm
+} 
+
+today = yyyy + '-' + mm + '-' + dd;
+if (today<k2)
+{
+alert("DateOfBirth cannot be greater than present date plz enter valid date");
+}
+else{
+    flag6=true;
+}
+
+var pattern= /^[A-Za-z]+$/;
+var pattern2 =/^[7-9]{1}[0-9]{9}$/;
+//var pattern3=/^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*+$/;
+var pattern3=/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    // Get the value of the input field with id="numb"
+   
+    // If x is Not a Number or less than one or greater than 10
+    if(k.match(pattern3)!=null)
+    {
+     flag1=true;
+       
+    } else {
+        alert("please enter valid email address");
+    }
+  
+    if(x.match(pattern))
+    {
+     flag2=true;
+       
+    } else {
+        alert("please enter valid firstname");
+    }
+
+    if(x1.match(pattern))
+    {
+     flag3=true;
+       
+    } else {
+        alert("please enter valid secondname");
+    }
+    if(z.match(pattern2) && z.length==10)
+    {
+     flag4=true;
+       
+    } else {
+        alert("please enter valid phone Number");
+    }
+    
+
+var  a=/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
+if(y.match(a)!=null)//y.match(passw)) 
+{ 
+
+flag5= true;
+}
+else
+{ 
+alert('Wrong.....! password should contain atleast one digit,one lowercase,one uppercase and one special character... andf length should be minimum 8 characters');
+flag5= false;
+}
+
+alert(flag1+"  "+flag2+"  "+flag3+"  "+flag4+"  "+flag5+"  "+flag6+"  "+FlagForPasswordComparison);
+
+if(flag1==true && flag2==true &&  flag3==true && flag4==true && flag5==true && flag6==true && FlagForPasswordComparison==true )
+{
+    alert("main yahan hu");
+return true;
+}
+else {
+     alert("nai main yahan hu");
+return false;
+}
+}
+</script>

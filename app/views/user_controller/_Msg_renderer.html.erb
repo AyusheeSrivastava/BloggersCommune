@@ -1,0 +1,25 @@
+<% @success||=''
+ @msg||='' %>
+<%if @success=='true'
+	colour_code='green'
+	
+else
+	colour_code='red'
+	end%>
+<div id="Msg_Dispalyer_div" style="background-color:<%=colour_code%> ; height:40px; display:none;">
+	<center>
+<%=@msg%>
+</center>
+</div>
+<% if !@success.empty? && !@msg.empty? %>
+<script type="text/javascript">
+
+	
+	$('#Msg_Dispalyer_div').show();
+
+	setTimeout(function() {
+	 
+	 $('#Msg_Dispalyer_div').hide();
+	 }, 2000);
+</script>
+<%end%>

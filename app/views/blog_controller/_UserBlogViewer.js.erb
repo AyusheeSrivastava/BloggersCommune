@@ -1,0 +1,3 @@
+$("#blogDiv").html("<%=escape_javascript(render :template=>'blog_controller/_view_my_blog.html.erb')%>")
+$('#closeBtnId').click();
+$("#msg_renderer").html("<%= escape_javascript(render :template=>'user_controller/_Msg_renderer.html.erb' )%>")

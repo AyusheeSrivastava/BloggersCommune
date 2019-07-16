@@ -1,0 +1,10 @@
+<%  if @success=='true' %>
+ $('#navbarId').hide();
+ $('#headerId').hide();
+ $('#closeBtnId').click();
+ $('#pager_div').show();
+	
+	$("#pager_div").html("<%=escape_javascript(render :template=>'user_controller/_HomePage.html.erb')%>")
+
+	<%end%>
+$("#msg_renderer").html("<%= escape_javascript(render :template=>'user_controller/_Msg_renderer.html.erb' )%>")

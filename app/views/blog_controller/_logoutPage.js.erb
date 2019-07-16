@@ -1,0 +1,38 @@
+<% if @success='true' %>
+$('#navbarId').show();
+$('#headerId').show();
+$('#pager_div').hide();
+<%end%>
+function logoutMarqueeFunction(id){
+      img_asset_name='';
+      img_desc='';
+      if(id==1)
+      {
+        img_desc='<span style="font-size:20px; color:aquamarine; font-style:italic;">A customized login form modal that allows user to login in securely into his account.</span>'
+      }
+      else if(id==2){
+        img_desc='<span style="font-size:20px; color:aquamarine; font-style:italic;">A customized SignUp form modal that allows user to create His/Her account  in secured manner with unique id generated systematically .</span>'
+      }
+      else if(id==3){
+        img_desc='<span style="font-size:20px; color:aquamarine; font-style:italic;">Home Page for User with his personnel Details Which he can Update as per his/her requirements with various options.</span>'
+      }
+
+      else if(id==4){
+        img_desc='<span style="font-size:20px; color:aquamarine; font-style:italic;">A page where user can  see blogs created by him/her as well as all the blogs created by every user and can  also comment on blogs created by any other user.</span>'
+      }
+
+else if(id==5){
+        img_desc='<span style="font-size:20px; color:aquamarine; font-style:italic;">A page where user can  see blogs created by him/her with delete and edit options.</span>'
+      }
+
+else if(id==6){
+        img_desc='<span style="font-size:20px; color:aquamarine; font-style:italic;">A page where user can  create new  blogs and can also see previous bogs created by him/her with edit and delete options.</span>'
+      }
+      image_tag_src=$('#'+id).attr('src');
+      $('.modal-title').html("Site Overview");
+      $('#modalBodyId').html("<img src='"+image_tag_src+"' style='width:300px;'><br>");
+      $('#modalBodyId').append(img_desc);
+    }
+$("#msg_renderer").html("<%= escape_javascript(render :template=>'user_controller/_Msg_renderer.html.erb' )%>")
+
+$('#floater').html('<marquee behavior="scroll" direction="left"><img src="<%=asset_path("CaptureLogin.PNG")%>" id="1" width="500" height="500" data-toggle="modal" data-target="#myModal" onclick="logoutMarqueeFunction(1);"><img src="<%=asset_path("signup.JPG")%>" id="2" width="500" height="500" data-toggle="modal" data-target="#myModal" onclick="logoutMarqueeFunction(2);"><img src="<%=asset_path("Dashboard.JPG")%>" id="3" width="500" height="500" data-toggle="modal" data-target="#myModal" onclick="logoutMarqueeFunction(3);"><img src="<%=asset_path("global_blogs.JPG")%>" id="4" width="500" height="500" data-toggle="modal" data-target="#myModal" onclick="logoutMarqueeFunction(4);"><img src="<%=asset_path("my_blogs.JPG")%>" id="5" width="500" height="500" data-toggle="modal" data-target="#myModal" onclick="logoutMarqueeFunction(5);"><img src="<%=asset_path("new_blogs.JPG")%>" id="6" width="500" height="500" data-toggle="modal" data-target="#myModal" onclick="logoutMarqueeFunction(6);"></marquee>');

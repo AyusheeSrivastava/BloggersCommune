@@ -1,0 +1,121 @@
+
+<style>
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+</style>
+
+
+
+<div class="navbar" id="navbar2">
+
+	
+	  <div class="dropdown">
+    <button class="dropbtn"><% if @object.gender==0 %> <img src='<%=asset_path("img_avatar of boy.png")%>' style='height: 40px;width: 40px;border-radius: 50%;'><%else%> <img src='<%=asset_path("img_avatar2 of girl.png")%>' style='height: 40px;width: 40px; border-radius:50%; '><%end%>
+        <span id="home_link_usrname">
+        <%=@object.firstname%>  <%=@object.secondname%></span> <% a="<img src='#{asset_path("logout_image2.png")}' style='height: 22px;width: 22px;'>" %>
+      <%= link_to a.html_safe,{:controller => "blog_controller", :action => "logout_user",:remote => true},:class => 'links' ,:title=>"Logout",:style=>'padding: 7px 20px' %> 
+
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+       
+    </div>
+  </div> 
+ 
+<%= link_to "Create Your Own Blog",{:controller => "blog_controller", :action => "create_blog",:remote => true}, :onclick=> "$('#blogDiv').show();" ,:style=>'padding: 20px 20px','data-toggle'=>"modal" ,'data-target'=>"#myModal",:class => 'links'  %> 
+
+<%= link_to "View My Blogs",{:controller => "blog_controller", :action => "users_blog",:remote => true}, :onclick=> "$('#blogDiv').show();",:style=>'padding: 20px 20px',:class => 'links'  %>
+<%= link_to "View Global Blogs",{:controller => "blog_controller", :action => "view_blog",:remote => true},
+:onclick=> "$('#blogDiv').show();", :style=>'padding: 20px 20px',:class => 'links'  %>
+<%= link_to "Back to home",{:controller => "blog_controller", :action => "backToHome",:remote => true},
+:onclick=> "$('#blogDiv').show();", :style=>'padding: 20px 20px',:x=>"@object.id",:class => 'links'  %>
+
+
+
+</div>
+<div class="BloggerDiv" id="blogDiv">
+    <center>
+        
+        <div style="margin-top: 5%;background: black;width: 55%;height: 310px;border-radius: 5%;box-shadow: grey 10px 10px;">
+            <div style="margin-left: 10px;margin-top: 10px;">
+            <% if @object.gender==0 %>
+             <img src='<%=asset_path("img_avatar of boy.png")%>' style='height: 100px;width: 100px;border-radius: 50%;box-shadow: grey 7px 3px;float: left;'>
+             <%else%>
+              <img src='<%=asset_path("img_avatar2 of girl.png")%>' style='height: 100px;width: 100px; border-radius:50%;box-shadow: grey 7px 3px;float: left; '>
+              <%end%>
+
+        </div>
+        <div style="float:left;">
+        	<table style="font-style: oblique;font-family: serif;font-size: 23px;display: block;margin-left: 30px;color: gray;">
+        		<tr>
+        			<td style="color:slategrey;"><b> First Name </b></td>  <td>~></td> <td style="color:darkgoldenrod;"> <%=@object.firstname%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>SecondName </b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.secondname%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>Email </b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.email%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>Date Of Birth</b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.dob.strftime("%b %d,%Y")%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+        		<tr><td style="color:slategrey;"><b>Phone Number</b></td><td>~></td><td style="color:darkgoldenrod;"><%=@object.phoneNo%></td>
+        		</tr><tr><td style="padding-bottom: 5px;"></td></tr>
+                <% if @object.gender==0 %>
+                <tr><td style="color:slategrey;"><b>Gender</b></td><td>~></td><td style="color:darkgoldenrod;">Male</td>
+                </tr><tr><td style="padding-bottom: 5px;"></td></tr>
+                <%else%>
+                <tr><td style="color:slategrey;"><b>Gender</b></td><td>~></td><td style="color:darkgoldenrod;">Female</td>
+                </tr><tr><td style="padding-bottom: 5px;"></td></tr>
+                
+                <%end%>
+
+        	</table>
+            <br>
+            <%= link_to "Update Basic Info",{:controller => "user_controller", :action => "edit_info",:remote => true,:key =>@object.id},:style=>"padding: 10px 40px;font-size: 25px;border-bottom-style: double;background-color: cornsilk;border-radius: 9px;",'data-toggle'=>"modal" ,'data-target'=>"#myModal",:class => 'links'  %> 
+        </div>
+        </div>
+    </center>
+</div>

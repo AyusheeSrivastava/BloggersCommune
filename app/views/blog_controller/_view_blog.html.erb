@@ -1,0 +1,46 @@
+<div class="viewDiv"  style="width:fit-content; background-image:url('<%=asset_path("background_image5.jpg")%>'); background-repeat: no-repeat;
+    background-size: cover;
+    height: fit-content; 
+    font-style: italic;
+    font-size: 20px;
+    color: darkkhaki;
+    padding: 20px;
+    width:100%;" >
+    <table>
+    	
+<% @object.each do |x| %>
+<%a=x.user_model%>
+<%logger.debug"DHRUVVVVVVVVVVVVV#{x.inspect}_________________#{a.inspect}"%>
+<tr><td  style=" color: darksalmon;">Bloggers Title</td><td>&nbsp;</td>
+    		<td style="color:palevioletred;">
+<%=x.title%></td>
+</tr><tr></tr>
+<tr><td style="color:beige;">Created At</td><td>&nbsp;</td><td style="color:darkseagreen;">
+<%=x.created_at.strftime("%Y-%m-%d")%></td></tr>
+
+<tr><td style="color:red;">Created By</td><td>&nbsp;</td><td style="color:peachpuff;">
+<%=a.firstname%>&nbsp;<%=a.secondname%></td></tr>
+
+
+
+<tr><td style="color:cornflowerblue;">Bloggers Description</td><td></td><td style="color:greenyellow;">
+<%=x.description%></td></tr>
+<tr><td>
+
+<%= link_to "Comment" ,{:controller => "comments_controller", :action => "users_comment",:id=>x.id,:remote => true},:class => 'links' ,'data-toggle'=>"modal",'data-target'=>"#myModal" %>
+</td></tr><tr><td style="padding-bottom: 20px;"></td></tr>
+
+
+<%end%>
+</table>
+<div id="paginate_control" style="float:right;margin-top:-10px;">
+    <%if @current_page.to_i>1%>
+<%= link_to "previous" ,{:controller => "blog_controller", :action => "view_blog",:page=>@current_page.to_i-1 ,:remote => true},:class => 'links'  %>
+<%end%>
+|<%=@current_page%>|
+<% if (@current_page.to_i*5)<@total_data_count.to_i%>
+<%= link_to "next" ,{:controller => "blog_controller", :action => "view_blog",:page=>@current_page.to_i+1 ,:remote => true},:class => 'links'  %>
+<%end%>
+</div>
+</div>
+
